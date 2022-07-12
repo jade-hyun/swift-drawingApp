@@ -9,12 +9,7 @@ import UIKit
 
 class DrawingView: UIView {
 
-    private var drawables: [(PathDrawable, UIColor)] = []
-    private var selectedDrawable: PathDrawable?
-
     func addDrawable(_ drawable: PathDrawable, color: UIColor) {
-        drawables.append((drawable, color))
-
         if let layer = findLayer(for: drawable) {
             update(layer: layer, path: drawable.path().cgPath)
         } else {

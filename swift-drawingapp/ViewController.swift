@@ -32,10 +32,7 @@ final class ViewController: UIViewController, PresenterPort {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let canvas = Canvas()
-        selection = canvas
-        drawing = canvas
-        canvas.setPresenter(self)
+        view.backgroundColor = .systemBackground
 
         squareButton.setTitle("사각형", for: .normal)
         lineButton.setTitle("선그리기", for: .normal)
@@ -63,6 +60,14 @@ final class ViewController: UIViewController, PresenterPort {
 
         view.addGestureRecognizer(tapGestureRecognizer)
         view.addGestureRecognizer(panGestureRecognizer)
+    }
+
+    func setSelectionUsecase(_ selection: SelectionUsecase) {
+        self.selection = selection
+    }
+
+    func setDrawingUsecase(_ drawing: DrawingUsecase) {
+        self.drawing = drawing
     }
 
     @objc
