@@ -7,9 +7,9 @@
 
 import UIKit
 
-protocol DrawingData: Identifiable {
-    var id: UUID { get }
+protocol DrawingData {
     var points: [Point] { get }
+    var isSelected: Bool { get set }
 
     func addPoint(_ point: Point)
 }
@@ -19,9 +19,10 @@ protocol PathDrawable {
 }
 
 class Line: PathDrawable, DrawingData {
-    
+
     private(set) var id: UUID = UUID()
     private(set) var points: [Point]
+    var isSelected: Bool = false
 
     init(points: [Point]) {
         self.points = points
@@ -56,16 +57,15 @@ class Square: Line {
         super.init(points: [origin,
                             origin.moving(byX: 100, y: 0),
                             origin.moving(byX: 100, y: 100),
-                            origin.moving(byX: 0, y: 100),
-                            origin.moving(byX: 0, y: 0)])
+                            origin.moving(byX: 0, y: 100)])
     }
 
-//    override func path() -> UIBezierPath {
-//        let bezierPath = super.path()
-//        bezierPath.close()
-//
-//        return bezierPath
-//    }
+    override func path() -> UIBezierPath {
+        let bezierPath = super.path()
+        bezierPath.close()
+
+        return bezierPath
+    }
 
     override func addPoint(_ point: Point) {
         return
